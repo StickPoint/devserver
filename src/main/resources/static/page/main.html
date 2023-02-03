@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="">
+<head>
+<meta charset="utf-8" content="">
+<title>DevTools管理中心</title>
+<!--字体图标-->
+<link href="../css/icomoon.css" rel="stylesheet" />
+<!--骨架样式-->
+<link href="../css/common.css" rel="stylesheet" />
+<!--皮肤-->
+<link href="../css/skin/default.css" rel="stylesheet" />
+<!--jquery，如果不使用jquery高版本的新功能的话，不建议修改版本-->
+<script src="../lib/jquery-1.7.2.min.js" type=""></script>
+<!--核心组件-->
+<script src="../js/javaex.js" type=""></script>
+<!--表单验证-->
+<script src="../js/javaex-formVerify.js" type=""></script>
+<style type="">
+.javaex-container {position:relative;width:100%;min-height:600px;height:100vh;display:flex;flex-direction:row;flex:1;flex-basis:auto;box-sizing:border-box;min-width:0;}
+aside {background-color:#031528;position:absolute;left:0;top:0;height:100%;width:220px;box-shadow:rgba(0,0,0,0.5) 0 2px 4px 0;z-index:10;}
+.javaex-logo {display:block;margin:20px 0 30px 42px;}
+.javaex-logo > img {width:106px;height:auto;vertical-align:middle;}
+.javaex-menu-container {background-color:#031528;}
+.javaex-menu .javaex-menu-item {width:100%;font-size:16px;padding:0;}
+.javaex-menu .javaex-menu-item.hover > a {color:#ccd0d4;display:block;}
+.javaex-menu-container .javaex-menu a {color:#ccd0d4;width:100%;height:50px;line-height:50px;}
+.javaex-menu li {border-left:3px solid #031528;}
+.javaex-menu li.javaex-menu-item > a:hover,.javaex-menu li.javaex-menu-item li a:hover {color:#fff;background-color:#03223d;}
+.javaex-menu .javaex-menu-item.hover > a,.javaex-menu .javaex-menu-item ul .hover a {color:#fff;background-color:#03223d;}
+.javaex-menu li.javaex-menu-item.javaex-menu-show > a {color:#ccd0d4;background-color:unset;}
+.javaex-menu li.javaex-menu-item li a {padding-left:44px;color:#7f8c99;height:42px;line-height:42px;}
+.javaex-menu .javaex-menu-item.alone.hover,.javaex-menu .javaex-menu-item ul .hover {border-color:#06a8ff;}
+.javaex-menu .javaex-menu-item.alone.hover > a::before {height:50px;}
+.javaex-menu .javaex-menu-item ul .hover a::before {height:42px;}
+section {margin-left:220px;flex-direction:column;display:flex;flex:1;min-width:0;}
+header {background:#fff;color:#333;width:100%;display:flex;flex-direction:row;justify-content:space-between;height:60px; border-bottom: 1px solid #EBEBEB;}
+.javaex-header-title {font-size:16px;line-height:60px;padding-left:20px;}
+.javaex-header-right {display:flex;flex-direction:row;justify-content:flex-end;min-width:310px;}
+.javaex-header-line {height:10px;width:1px;background-color:#d8d8d8;margin-top:26px;display:inline-block;}
+.javaex-header-menu {padding:0 12px;font-size:12px;line-height:60px;cursor:pointer;}
+.javaex-header-notify {position:relative;padding-right:16px;}
+.javaex-dropdown {font-size:12px;color:#666;cursor:pointer;display:inline-block;position:relative;}
+.javaex-header-user-avatar {width:30px;height:30px;border-radius:50%;vertical-align:middle;}
+.javaex-header-username {margin-left:10px;font-size:12px;letter-spacing:0;}
+.javaex-header-user .icon {color:#333;font-size:14px;}
+.javaex-dropdown-menu {transform-origin:center top;z-index:2011;position:absolute;display:none;border-radius:4px;left:-0;top:61px;background-color:#1f1f21;width:100%;text-align:center;padding:10px 0;box-shadow:0 2px 12px 0 rgba(0,0,0,.1);}
+.javaex-dropdown:hover .javaex-dropdown-menu {display:block;}
+.javaex-dropdown-menu .javaex-dropdown-menu-item {list-style:none;line-height:36px;padding:0 20px;margin:0;font-size:14px;color:#606266;cursor:pointer;outline:0;}
+.javaex-dropdown-menu .javaex-dropdown-menu-item a {color:#fff;}
+.javaex-dropdown-menu li:hover {background:#404040;}
+.popper-arrow {position:absolute;top:-5px;left:50%;margin-left:-8px;border-right:5px solid transparent;border-bottom:5px solid #1f1f21;border-left:5px solid transparent;border-bottom-color:#1f1f21;}
+.javaex-breadcrumb {height: 60px;line-height: 60px;margin-bottom: 0;}
+main {background:#f1f1f1;padding-bottom:0;display:block;flex:1;}
+</style>
+</head>
+
+<body>
+	<div class="javaex-container">
+		<aside>
+			<a href="javascript:" class="javaex-logo">
+				<img src="https://s1.ax1x.com/2023/02/02/pSr8bZt.png" alt="pSr8bZt.png" border="0" />
+			</a>
+			<div class="javaex-menu-container" style="height: calc(100% - 103px);">
+				<div id="menu" class="javaex-menu">
+					<ul>
+						<li class="javaex-menu-item alone hover">
+							<a href="javascript:" onclick="page(this, 'home.html')">数据面板</a>
+						</li>
+					</ul>
+					<ul>
+						<li class="javaex-menu-item">
+							<a href="javascript:">系统管理<i class="icon-angle-down"></i></a>
+							<ul>
+								<li><a href="javascript:" onclick="page(this, 'list.html')">权限管理</a></li>
+								<li><a href="javascript:" onclick="page(this, 'list.html')">角色管理</a></li>
+								<li><a href="javascript:" onclick="page(this, 'list.html')">用户管理</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul>
+						<li class="javaex-menu-item">
+							<a href="javascript:">配置中心<i class="icon-angle-down"></i></a>
+							<ul>
+								<li><a href="javascript:" onclick="page(this, 'list.html')">公网配置</a></li>
+								<li><a href="javascript:" onclick="page(this, 'list.html')">内网配置</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul>
+						<li class="javaex-menu-item alone">
+							<a href="javascript:" onclick="page(this, 'home.html')">插件管理</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</aside>
+		<section>
+			<header>
+				<div id="title" class="javaex-header-title"></div>
+				<div class="javaex-header-right">
+					<div class="javaex-header-menu javaex-header-notify">
+						<i class="icon-notifications_none"></i>
+						<span class="devLoginInput">消息</span>
+					</div>
+					<span class="javaex-header-line"></span>
+					<div class="javaex-header-menu">
+						<span class="devLoginInput">帮助中心</span></div>
+					<span class="javaex-header-line"></span>
+					<div class="javaex-header-menu javaex-header-user">
+						<div class="javaex-dropdown">
+							<div>
+								<img id="icon" src="http://webimg.javaex.cn/bdd3fdaf20e74fb08b0ebe56495b3741" class="javaex-header-user-avatar" />
+								<span class="javaex-header-username">
+									用户：<span id="username">demo123231</span>
+								</span>
+								<i class="icon icon-caret-down"></i>
+							</div>
+							<ul class="javaex-dropdown-menu javaex-animated-slide-down">
+								<li class="javaex-dropdown-menu-item"><a href="javascript:">个人信息</a></li>
+								<li class="javaex-dropdown-menu-item"><a onclick="logout()">退出登录</a></li>
+								<li class="javaex-dropdown-menu-item"><a onclick="about()">关于系统</a></li>
+								<div class="popper-arrow"> </div>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</header>
+			<main>
+				<!--iframe载入内容-->
+				<div class="javaex-markdown">
+					<iframe id="page" src="home.html"></iframe>
+				</div>
+			</main>
+		</section>
+	</div>
+</body>
+<script>
+
+	/**
+	 * 登陆之后，顶部用户信息初始化
+	 * 初始化用户身份信息
+	 * */
+	(function initUserInfo(){
+		// 首先获得用户基本信息Json字符串
+		let userInfoJsonString = localStorage.getItem("devTools-userInfo");
+		// 将字符串转为对象
+		let userInfo = JSON.parse(userInfoJsonString);
+		console.log(userInfo);
+		// 然后进行信息填充
+		$('#icon').attr('src',userInfo.icon);
+		console.log(userInfo.username)
+		$('#username').text(userInfo.username);
+	})(jQuery);
+
+
+	javaex.menu({
+		id : "menu"
+	});
+
+	$(function() {
+		$("#title").html('<div class="javaex-page-header"><div class="javaex-breadcrumb"><span>数据面板</span></div></div>');
+	});
+
+	/**
+	 * 控制页面载入
+	 */
+	function page(obj, url) {
+		let html = '';
+
+		if ($(obj).parent(".alone").length==1) {
+			html += '<div class="javaex-page-header">\
+				<div class="javaex-breadcrumb">\
+					<span>'+$(obj).parent(".alone").text()+'</span>\
+				</div>\
+			</div>';
+		} else {
+			html += '<div class="javaex-page-header">\
+				<div class="javaex-breadcrumb">\
+					<span>'+$(obj).closest(".javaex-menu-item").children("a").text()+'</span>\
+					<span class="divider">/</span>\
+					<span class="active">'+$(obj).text()+'</span>\
+				</div>\
+			</div>';
+		}
+
+		$("#title").html(html);
+		$("#page").prop("src", url);
+	}
+
+	/**
+	 * 退出登录
+	 * 清除缓存数据，直接退出
+	 */
+	function logout(){
+		localStorage.clear();
+		location.replace("../index.html");
+	}
+
+	/**
+	 * 关于页面
+	 */
+	function about(){
+		// 首先请求后台关于接口然后直接显示
+		javaex.alert({
+			content : "当前版本信息：v0.01.01.11112",
+			confirm : function() {
+				// 如果你想阻止弹出层关闭，直接 return false; 即可
+				return true;
+			}
+		});
+	}
+</script>
+</html>

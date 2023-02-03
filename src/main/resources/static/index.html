@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>login</title>
+<link rel="stylesheet" type="text/css" href="css/login-2.css" />
+<link rel="stylesheet" type="text/css" href="css/login-3.css" />
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" href="css/login-1.css" />
+<!--字体图标-->
+<link href="css/icomoon.css" rel="stylesheet" />
+<!--骨架样式-->
+<link href="css/common.css" rel="stylesheet" />
+<!--皮肤-->
+<link href="css/skin/default.css" rel="stylesheet" />
+<!--jquery，如果不使用jquery高版本的新功能的话，不建议修改版本-->
+<script src="lib/jquery-1.7.2.min.js"></script>
+<!--核心组件，不要压缩，压缩后部分功能可能会失效-->
+<script src="js/javaex.js"></script>
+<!--表单验证-->
+<script src="js/javaex-formVerify.js"></script>
+<![endif]-->
+</head>
+<body>
+		<div class="container demo-1">
+			<div class="content">
+				<div id="large-header" class="large-header">
+					<canvas id="demo-canvas"></canvas>
+					<div class="logo_box">
+						<img src="https://s1.ax1x.com/2023/02/02/pSr8bZt.png" alt="pSr8bZt.png" border="0" />
+						<h3>后台管理中心</h3>
+						<form action="#" name="f" method="post">
+							<div class="input_outer">
+								<span class="u_user"></span>
+								<label>
+									<input id="username"  class="devLoginInput" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+								</label>
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<label>
+									<input id="password"  class="devLoginInput" style="color: #FFFFFF !important; position:absolute; z-index:100;" value="" type="password" placeholder="请输入密码">
+								</label>
+							</div>
+							<div class="mb2" onclick="userLogin()"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF">登录</a></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="js/login.min-2.js"></script>
+		<script src="js/login.min-1.js"></script>
+		<script src="js/login-2.js"></script>
+		<script src="js/login-1.js"></script>
+		<script src="js/axios.min.js"></script>
+	</body>
+	<script>
+		(function checkUserInfo(){
+			let userInfoJsonString = localStorage.getItem("devTools-userInfo");
+			// 如果当前localStorage中存在用户信息，直接登录
+			if (userInfoJsonString.length > 0) {
+				location.replace("page/main.html");
+			}
+		})(jQuery);
+		/**
+		 * 登录方法
+		 */
+		function userLogin(){
+			const username =  document.getElementById('username').value;
+			const password = document.getElementById('password').value;
+			axios({
+				method:"post",
+				url:"sys/user/login",
+				data:{
+					"username":username,
+					"password":password
+				}
+			}).then(function (resp){
+				let result = resp.data.data;
+				console.log(result);
+				if (resp.data.code === 20000) {
+					tipLoginSuccess();
+					// 登录成功，存储用户信息数据
+					localStorage.setItem("devTools-userInfo",JSON.stringify(result));
+					// 跳转到新页面
+					location.replace("./page/main.html")
+				}else {
+					// 弹窗提示登录失败！
+					tipLoginFailed();
+				}
+			}).catch(error=>{
+				console.log(error);
+				// 弹窗提示登录失败！
+				tipLoginFailed();
+			})
+		}
+
+		function tipLoginSuccess() {
+			javaex.tip({
+				content : "登录成功！",
+				type : "success"
+			});
+		}
+
+		function tipLoginFailed() {
+			javaex.message({
+				content : "登录失败！账号或密码错误！",
+				type : "error"
+			});
+		}
+	</script>
+</html>

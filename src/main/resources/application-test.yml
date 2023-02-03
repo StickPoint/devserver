@@ -1,0 +1,17 @@
+
+#对分布式文件存储OSS-MinIO进行配置
+minio:
+  # 访问的url
+  endpoint: http://192.168.125.245
+  # API的端口
+  port: 9001
+  # 秘钥
+  accessKey: mxKVHfTCpGflGDxg
+  secretKey: cMTKcEJATDNEPwS1kFSXB8Uw5WYszIbU
+  secure: false
+  # 桶名 我这是给出了一个默认桶名
+  bucket-name: yuxiang-dev
+  # 我在这里设定了 图片文件的最大大小
+  image-size: 10485760
+  # 此处是设定了文件的最大大小
+  file-size: 1073741824

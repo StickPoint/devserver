@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="">
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<!--字体图标-->
+<link href="../css/icomoon.css" rel="stylesheet" />
+<!--骨架样式-->
+<link href="../css/common.css" rel="stylesheet" />
+<!--皮肤-->
+<link href="../css/skin/default.css" rel="stylesheet" />
+<!--jquery，如果不使用jquery高版本的新功能的话，不建议修改版本-->
+<script src="../lib/jquery-1.7.2.min.js"></script>
+<!--核心组件-->
+<script src="../js/javaex.js"></script>
+<!--表单验证-->
+<script src="../js/javaex-formVerify.js"></script>
+<script src="../js/echarts.js"></script>
+</head>
+
+<body>
+	<div>
+		<div id="top">
+			<div id="home-left" style="float: left">
+				<div id="pluginInfo" style="height: 500px; width: 840px;margin-top: 20px;"></div>
+			</div>
+			<div id="home-right" style="float: right">
+				<div id="recentlyPluginInfo" style="height: 500px; width: 840px;margin-top: 20px;"></div>
+			</div>
+		</div>
+		<div id="bottom"></div>
+	</div>
+</body>
+<script>
+	let pluginInfoChartDom = document.getElementById('pluginInfo');
+	let pluginInfoMyChart = echarts.init(pluginInfoChartDom);
+	let pluginInfoOption;
+	setTimeout(function () {
+		pluginInfoOption = {
+			legend: {},
+			tooltip: {
+				trigger: 'axis',
+				showContent: false
+			},
+			dataset: {
+				source: [
+					['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+					['前端助手', 56.5, 82.1, 88.7, 70.1, 53.4, 85.1],
+					['后端助手', 51.1, 51.4, 55.1, 53.3, 73.8, 68.7],
+					['运维助手', 40.1, 62.2, 69.5, 36.4, 45.2, 32.5],
+					['UI助手', 25.2, 37.1, 41.2, 18, 33.9, 49.1]
+				]
+			},
+			xAxis: { type: 'category' },
+			yAxis: { gridIndex: 0 },
+			grid: { top: '55%' },
+			series: [
+				{
+					type: 'line',
+					smooth: true,
+					seriesLayoutBy: 'row',
+					emphasis: { focus: 'series' }
+				},
+				{
+					type: 'line',
+					smooth: true,
+					seriesLayoutBy: 'row',
+					emphasis: { focus: 'series' }
+				},
+				{
+					type: 'line',
+					smooth: true,
+					seriesLayoutBy: 'row',
+					emphasis: { focus: 'series' }
+				},
+				{
+					type: 'line',
+					smooth: true,
+					seriesLayoutBy: 'row',
+					emphasis: { focus: 'series' }
+				},
+				{
+					type: 'pie',
+					id: 'pie',
+					radius: '30%',
+					center: ['50%', '25%'],
+					emphasis: {
+						focus: 'self'
+					},
+					label: {
+						formatter: '{b}: {@2012} ({d}%)'
+					},
+					encode: {
+						itemName: 'product',
+						value: '2012',
+						tooltip: '2012'
+					}
+				}
+			]
+		};
+		pluginInfoMyChart.on('updateAxisPointer', function (event) {
+			const xAxisInfo = event.axesInfo[0];
+			if (xAxisInfo) {
+				const dimension = xAxisInfo.value + 1;
+				pluginInfoMyChart.setOption({
+					series: {
+						id: 'pie',
+						label: {
+							formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+						},
+						encode: {
+							value: dimension,
+							tooltip: dimension
+						}
+					}
+				});
+			}
+		});
+		pluginInfoMyChart.setOption(pluginInfoOption);
+	});
+	pluginInfoOption && pluginInfoMyChart.setOption(pluginInfoOption);
+	//--------------------------------------------------------------------------
+	//	近期插件数量变化情况
+	let recentlyPluginInfo = document.getElementById('recentlyPluginInfo');
+	let recentlyPluginInfoChart = echarts.init(recentlyPluginInfo);
+	let recentlyPluginInfoOption;
+	recentlyPluginInfoOption = {
+		xAxis: {
+			type: 'category',
+			data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月']
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [
+			{
+				data: [150, 230, 224, 218, 135, 147, 260],
+				type: 'line'
+			}
+		]
+	};
+	recentlyPluginInfoOption && recentlyPluginInfoChart.setOption(recentlyPluginInfoOption);
+</script>
+</html>
